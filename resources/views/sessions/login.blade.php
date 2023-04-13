@@ -15,13 +15,15 @@
                     <x-form.input name="password" type="password" placeholder="Fill in password" />
                     <div class="flex justify-between items-center">
                         <x-form.checkbox name="remember" />
-                        <a href="#" class="capitalize font-semibold text-sm text-primary">Forgot
+                        <a href="{{ route('view.reset_password') }}"
+                            class="capitalize font-semibold text-sm text-primary">Forgot
                             password?</a>
                     </div>
                     <x-form.button>Log In</x-form.button>
                 </form>
                 <p class="text-gray-400 font-normal text-lg mt-6 text-center md:max-w-[400px]">Don’t have and account?
-                    <a href="{{ route('view.register') }}" class="text-black font-bold ">Sign up for free</a></p>
+                    <a href="{{ route('view.register') }}" class="text-black font-bold ">Sign up for free</a>
+                </p>
             </main>
         </div>
         <div class="hidden md:block lg:min-w-[600px]">

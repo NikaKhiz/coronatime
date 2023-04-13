@@ -17,4 +17,5 @@ Route::redirect('/', 'login');
 Route::middleware('guest')->group(function () {
 	Route::view('/login', 'sessions.login')->name('view.login');
 	Route::view('/register', 'sessions.register')->name('view.register');
+	Route::view('/reset-password', 'sessions.reset')->name('view.reset_password');
 });
