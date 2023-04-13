@@ -16,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', 'login');
 Route::middleware('guest')->group(function () {
 	Route::view('/login', 'sessions.login')->name('view.login');
+	Route::view('/register', 'sessions.register')->name('view.register');
 });

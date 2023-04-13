@@ -2,7 +2,7 @@
     <div class="flex justify-between">
         <div class="w-full">
             <x-navigation />
-            <main class="px-4 py-6 md:px-0 md:pl-24 md:py-10">
+            <main class="px-4 py-6 md:px-0 md:pl-24 md:py-5">
                 <form action="/login" method="POST" class="flex flex-col gap-6 w-full md:w-[400px]">
                     @csrf
                     <div class="flex flex-col gap-2 md:gap-4">
@@ -20,8 +20,8 @@
                     </div>
                     <x-form.button>Log In</x-form.button>
                 </form>
-                <p class="text-gray-400 font-normal text-lg mt-6">Don’t have and account? <a href="#"
-                        class="text-black font-bold ">Sign up for free</a></p>
+                <p class="text-gray-400 font-normal text-lg mt-6 text-center md:max-w-[400px]">Don’t have and account?
+                    <a href="{{ route('view.register') }}" class="text-black font-bold ">Sign up for free</a></p>
             </main>
         </div>
         <div class="hidden md:block lg:min-w-[600px]">
