@@ -3,7 +3,7 @@
         <div class="w-full">
             <x-navigation />
             <main class="px-4 py-6 md:px-0 md:pl-24 md:py-5">
-                <form action="/login" method="POST" class="flex flex-col gap-6 w-full md:w-[400px]">
+                <form action="{{ route('login_user') }}" method="POST" class="flex flex-col gap-6 w-full md:w-[400px]">
                     @csrf
                     <div class="flex flex-col gap-2 md:gap-4">
                         <h1 class="text-black font-bold text-2xl md:text-3xl">Welcome back</h1>

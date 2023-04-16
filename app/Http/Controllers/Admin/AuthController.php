@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RecoverPasswordRequest;
 use App\Http\Requests\Auth\RegisterUserRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
@@ -14,13 +15,14 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class AuthController extends Controller
 {
 	public function register(RegisterUserRequest $request): RedirectResponse
 	{
-		$user = User::create($request->validated());
+		$user = User::create([...$request->validated(), 'password' => bcrypt($request->password)]);
 
 		event(new Registered($user));
 		auth()->login($user);
@@ -62,5 +64,25 @@ class AuthController extends Controller
 		return $status === Password::PASSWORD_RESET
 		? redirect()->route('view.password_reset_success')
 		: back()->withErrors(['email' => [__($status)]]);
+	}
+
+	public function login(LoginRequest $request)
+	{
+		$fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+		if (!auth()->attempt([$fieldType => $request->username, 'password' =>$request->password])) {
+			throw  ValidationException::withMessages([
+				'username'=> 'Provided credentials couldnt be fulfilled',
+			]);
+		}
+
+		session()->regenerate();
+		return redirect()->route('admin.dashboard');
+	}
+
+	public function logout()
+	{
+		auth()->logout();
+		return redirect('/');
 	}
 }
