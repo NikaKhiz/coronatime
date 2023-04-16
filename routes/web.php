@@ -22,6 +22,7 @@ Route::middleware('guest')->group(function () {
 
 	Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
 	Route::post('/forgot-password', [AuthController::class, 'recoverPassword'])->name('password.email');
+
 	Route::get('/reset-password/{token}', function (string $token) {
 		return view('auth.reset-password', ['token' => $token]);
 	})->name('password.reset');
@@ -29,4 +30,6 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::view('/email/verify', 'auth.verify-email')->name('verification.notice');
-Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware(['auth', 'signed'])->name('verification.verify');
+Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
+
+Route::view('/reset-password', 'auth.succes-pwd')->name('view.password_reset_success');
