@@ -39,7 +39,7 @@
                     <x-form.button>Sign Up</x-form.button>
                 </form>
                 <p class="text-gray-400 font-normal text-lg mt-6 text-center md:max-w-[400px]"> Already have an
-                    account?<a href="{{ route('view.login') }}" class="text-black font-bold ">Log in</a></p>
+                    account? <a href="{{ route('view.login') }}" class="text-black font-bold ">Log in</a></p>
             </main>
         </div>
         <div class="hidden md:block lg:min-w-[600px]">

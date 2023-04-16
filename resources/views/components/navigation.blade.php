@@ -1,5 +1,6 @@
 <nav class="flex items-center justify-between px-4 py-6 md:px-0 md:pl-24 md:py-10">
     @auth
+        <img src="{{ asset('images/coronatime-dark.svg') }}" alt="coronatimeImg">
     @else
         <a href="{{ route('view.login') }}">
             <img src="{{ asset('images/coronatime-dark.svg') }}" alt="coronatimeImg">

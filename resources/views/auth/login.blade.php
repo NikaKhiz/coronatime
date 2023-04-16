@@ -15,7 +15,7 @@
                     <x-form.input name="password" type="password" placeholder="Fill in password" />
                     <div class="flex justify-between items-center">
                         <x-form.checkbox name="remember" />
-                        <a href="{{ route('view.password_reset') }}"
+                        <a href="{{ route('password.request') }}"
                             class="capitalize font-semibold text-sm text-primary">Forgot
                             password?</a>
                     </div>
