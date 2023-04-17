@@ -72,7 +72,7 @@ class AuthController extends Controller
 
 		if (!auth()->attempt([$fieldType => $request->username, 'password' =>$request->password])) {
 			throw  ValidationException::withMessages([
-				'username'=> 'Provided credentials couldnt be fulfilled',
+				'username'=> 'There is no user record with provided credentials.',
 			]);
 		}
 

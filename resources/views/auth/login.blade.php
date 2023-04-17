@@ -11,7 +11,7 @@
                             details
                         </p>
                     </div>
-                    <x-form.input name="username" placeholder="Enter unique username or email" />
+                    <x-form.input name="username" placeholder="Enter unique username or email" :value="old('username')" />
                     <x-form.input name="password" type="password" placeholder="Fill in password" />
                     <div class="flex justify-between items-center">
                         <x-form.checkbox name="remember" />

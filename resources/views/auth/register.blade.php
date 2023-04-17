@@ -24,7 +24,9 @@
                     </div>
                     <div class="flex flex-col gap-2">
                         <x-form.input name="password" type="password" placeholder="Fill in password" />
-                        <p class="text-xs text-gray-600 font-normal">Password should be min 3 symbols </p>
+                        @if (!$errors->has('password'))
+                            <p class="text-xs text-gray-600 font-normal">Password should be min 3 symbols </p>
+                        @endif
                     </div>
                     <div class="flex flex-col gap-2">
                         <x-form.field>
@@ -32,9 +34,17 @@
                                 password</label>
                             <input type="password" id="password_confirmation" name="password_confirmation"
                                 placeholder="Repeat password"
-                                class="px-6 py-4 border border-gray-400 focus:border-primary transition-all duration-300 rounded-md outline-none capitalize text-gray-700">
+                                class="px-6 py-4 border {{ $errors->has('password_confirmation') ? 'border-red-500' : 'border-gray-500' }}  focus:border-primary transition-all duration-300 rounded-md outline-none capitalize text-gray-700">
                         </x-form.field>
-                        <p class="text-xs text-gray-600 font-normal">Repeat password must match password </p>
+                        @if (!$errors->has('password_confirmation'))
+                            <p class="text-xs text-gray-600 font-normal">Repeat password must match password </p>
+                        @else
+                            <div class="flex items-center gap-2">
+                                <img src="{{ asset('images/error.svg') }}" alt="errorImg" class="">
+                                <x-form.error name="password_confirmation" />
+                            </div>
+                        @endif
+
                     </div>
                     <x-form.button>Sign Up</x-form.button>
                 </form>
