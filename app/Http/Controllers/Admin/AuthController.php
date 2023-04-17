@@ -70,14 +70,14 @@ class AuthController extends Controller
 	{
 		$fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-		if (!auth()->attempt([$fieldType => $request->username, 'password' =>$request->password])) {
-			throw  ValidationException::withMessages([
-				'username'=> 'There is no user record with provided credentials.',
-			]);
+		if (auth()->attempt([$fieldType => $request->username, 'password' =>$request->password], $request->has('remember'))) {
+			session()->regenerate();
+			return redirect()->route('admin.dashboard');
 		}
 
-		session()->regenerate();
-		return redirect()->route('admin.dashboard');
+		throw  ValidationException::withMessages([
+			'username'=> 'There is no user record with provided credentials.',
+		]);
 	}
 
 	public function logout()
