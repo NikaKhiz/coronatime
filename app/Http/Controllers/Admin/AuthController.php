@@ -8,10 +8,12 @@ use App\Http\Requests\Auth\RecoverPasswordRequest;
 use App\Http\Requests\Auth\RegisterUserRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
@@ -25,14 +27,23 @@ class AuthController extends Controller
 		$user = User::create([...$request->validated(), 'password' => bcrypt($request->password)]);
 
 		event(new Registered($user));
-		auth()->login($user);
 		return redirect()->route('verification.notice');
 	}
 
-	public function verifyEmail(EmailVerificationRequest $request): View
+	public function verifyEmail(Request $request): View
 	{
-		$request->fulfill();
-		auth()->logout();
+		$user = User::findOrfail($request->route('id'));
+
+		if (!hash_equals((string) $request->route('id'), (string) $user->getKey())) {
+			throw new AuthorizationException;
+		}
+		if (!hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
+			throw new AuthorizationException;
+		}
+		if ($user->markEmailAsVerified()) {
+			event(new Verified($request->user()));
+		}
+		
 		return view('auth.success-email');
 	}
 
