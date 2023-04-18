@@ -12,9 +12,7 @@
 </head>
 
 <body>
-    <div class="max-w-screen-md h-screen mx-auto flex items-center justify-center">
-        <h1 class="text-gray-900 text-3xl">CoronaTime</h1>
-    </div>
+    {{ $slot }}
 </body>
 
 </html>
