@@ -46,6 +46,11 @@ class AuthController extends Controller
 					: back()->withErrors(['email' => __($status)]);
 	}
 
+	public function resetPasswordForm($token)
+	{
+		return view('auth.reset-password', ['token' => $token]);
+	}
+
 	public function resetPassword(ResetPasswordRequest $request): RedirectResponse
 	{
 		$status = Password::reset(
