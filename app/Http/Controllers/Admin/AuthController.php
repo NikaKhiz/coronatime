@@ -8,10 +8,9 @@ use App\Http\Requests\Auth\RecoverPasswordRequest;
 use App\Http\Requests\Auth\RegisterUserRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Models\User;
-use Illuminate\Auth\Access\AuthorizationException;
+use App\Services\AuthService;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -30,20 +29,9 @@ class AuthController extends Controller
 		return redirect()->route('verification.notice');
 	}
 
-	public function verifyEmail(Request $request): View
+	public function verifyEmail(Request $request, AuthService $authservice): View
 	{
-		$user = User::findOrfail($request->route('id'));
-
-		if (!hash_equals((string) $request->route('id'), (string) $user->getKey())) {
-			throw new AuthorizationException;
-		}
-		if (!hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
-			throw new AuthorizationException;
-		}
-		if ($user->markEmailAsVerified()) {
-			event(new Verified($request->user()));
-		}
-		
+		$authservice->verify($request);
 		return view('auth.success-email');
 	}
 
@@ -77,18 +65,27 @@ class AuthController extends Controller
 		: back()->withErrors(['email' => [__($status)]]);
 	}
 
-	public function login(LoginRequest $request)
+	public function login(LoginRequest $request, AuthService $authService): RedirectResponse
 	{
 		$fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-
-		if (auth()->attempt([$fieldType => $request->username, 'password' =>$request->password], $request->has('remember'))) {
-			session()->regenerate();
-			return redirect()->route('admin.dashboard');
+		if (!User::firstWhere($fieldType, $request->username)) {
+			throw  ValidationException::withMessages([
+				'username'=> 'There is no user record with provided username or email.',
+			]);
 		}
 
-		throw  ValidationException::withMessages([
-			'username'=> 'There is no user record with provided credentials.',
-		]);
+		if ($authService->isUserVerified($fieldType, $request->username)) {
+			if (auth()->attempt([$fieldType => $request->username, 'password' =>$request->password], $request->has('remember'))) {
+				session()->regenerate();
+				return redirect()->route('admin.dashboard');
+			} else {
+				throw  ValidationException::withMessages([
+					'username'=> 'Provided credentials are incorrect.',
+				]);
+			}
+		} else {
+			return redirect()->route('verification.notice');
+		}
 	}
 
 	public function logout()
