@@ -3,7 +3,7 @@
         <div class="w-full">
             <x-navigation />
             <main class="px-4 py-6 md:px-0 md:pl-24 md:py-5">
-                <form action="{{ route('login_user') }}" method="POST" class="flex flex-col gap-6 w-full md:w-[400px]">
+                <form action="{{ route('login_user') }}" method="POST" class="flex flex-col gap-6 w-full md:max-w-[400px]">
                     @csrf
                     <div class="flex flex-col gap-2 md:gap-4">
                         <h1 class="text-black  font-black text-2xl md:text-3xl">Welcome back</h1>
@@ -20,7 +20,7 @@
                     </div>
                     <x-form.button>Log In</x-form.button>
                 </form>
-                <p class="text-gray-400 font-normal text-[15px] mt-6 text-center md:max-w-[450px]">Don’t have and
+                <p class="text-gray-400 font-normal text-[15px] mt-6 text-center md:max-w-[400px]">Don’t have and
                     account?
                     <a href="{{ route('view.register') }}" class="text-black font-bold ">Sign up for free</a>
                 </p>
