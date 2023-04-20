@@ -7,7 +7,8 @@
                     @csrf
                     <div class="flex flex-col gap-2 md:gap-4">
                         <h1 class="text-black font-bold text-2xl md:text-3xl">Welcome to Coronatime</h1>
-                        <p class="text-gray-600 font-normal text-lg mg:text-2xl">Please enter required info to sign up
+                        <p class="text-gray-600 font-normal text-[15px] md:text-[20px]">Please enter required info to
+                            sign up
                         </p>
                     </div>
                     <div class="flex flex-col gap-2">
@@ -48,7 +49,7 @@
                     </div>
                     <x-form.button>Sign Up</x-form.button>
                 </form>
-                <p class="text-gray-400 font-normal text-lg mt-6 text-center md:max-w-[400px]"> Already have an
+                <p class="text-gray-400 font-normal text-[15px] mt-6 text-center md:max-w-[400px]"> Already have an
                     account? <a href="{{ route('view.login') }}" class="text-black font-bold ">Log in</a></p>
             </main>
         </div>
