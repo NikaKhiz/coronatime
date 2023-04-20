@@ -1,1 +1,3 @@
-<a href="{{ route('logout_user') }}">logout</a>
+<x-layout>
+    <x-navigation />
+</x-layout>
