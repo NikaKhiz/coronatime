@@ -1,0 +1,1 @@
+<div {{ $attributes(['class' => 'flex flex-col gap-4 md:gap-6 items-center rounded-[16px]']) }}>{{ $slot }}</div>
