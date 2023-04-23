@@ -1,4 +1,4 @@
-<nav class="flex items-center justify-between px-4 py-6 md:px-24 md:py-10">
+<nav class="flex items-center justify-between px-4 py-6 md:px-24 md:py-10 mx-auto">
     @auth
         <a href="{{ route('admin.dashboard') }}">
             <img src="{{ asset('images/coronatime-neutral.svg') }}" alt="coronatimeImg" class="w-[140px] md:w-[170px]">
@@ -21,7 +21,7 @@
         </div>
     @else
         <a href="{{ route('view.login') }}">
-            <img src="{{ asset('images/coronatime-dark.svg') }}" alt="coronatimeImg">
+            <img src="{{ asset('images/coronatime-dark.svg') }}" alt="coronatimeImg" />
         </a>
     @endauth
 
