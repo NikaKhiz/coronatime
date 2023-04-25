@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'welcome_back'    => 'Welcome Bacck',
+	'welcome_back'    => 'Welcome Back',
 	'welcome_details' => 'Welcome Back! Please enter your details',
 	'remember_device' => 'Remember this device',
 	'forgot_pwd'      => 'Forgot password?',

@@ -75,7 +75,7 @@ class AuthController extends Controller
 		$fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 		if (!User::firstWhere($fieldType, $request->username)) {
 			throw  ValidationException::withMessages([
-				'username'=> __('login.username'),
+				'username'=> __('login/login.username'),
 			]);
 		}
 

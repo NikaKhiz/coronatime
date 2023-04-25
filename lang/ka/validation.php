@@ -31,7 +31,7 @@ return [
 		'string'  => 'The :attribute field must be between :min and :max characters.',
 	],
 	'boolean'           => 'The :attribute field must be true or false.',
-	'confirmed'         => 'The :attribute field confirmation does not match.',
+	'confirmed'         => ':attribute ველი არ არის დადასტურებული',
 	'current_password'  => 'The password is incorrect.',
 	'date'              => 'The :attribute field must be a valid date.',
 	'date_equals'       => 'The :attribute field must be a date equal to :date.',
@@ -46,7 +46,7 @@ return [
 	'distinct'          => 'The :attribute field has a duplicate value.',
 	'doesnt_end_with'   => 'The :attribute field must not end with one of the following: :values.',
 	'doesnt_start_with' => 'The :attribute field must not start with one of the following: :values.',
-	'email'             => 'The :attribute field must be a valid email address.',
+	'email'             => ':attribute ველი უნდა იყოს ვალიდური მეილი.',
 	'ends_with'         => 'The :attribute field must end with one of the following: :values.',
 	'enum'              => 'The selected :attribute is invalid.',
 	'exists'            => 'The selected :attribute is invalid.',
@@ -99,7 +99,7 @@ return [
 		'array'   => 'The :attribute field must have at least :min items.',
 		'file'    => 'The :attribute field must be at least :min kilobytes.',
 		'numeric' => 'The :attribute field must be at least :min.',
-		'string'  => 'The :attribute field must be at least :min characters.',
+		'string'  => ':attribute ველი უნდა იყოს მინ 3 სიმბოლო.',
 	],
 	'min_digits'       => 'The :attribute field must have at least :min digits.',
 	'missing'          => 'The :attribute field must be missing.',
@@ -133,7 +133,7 @@ return [
 	'required_with_all'    => 'The :attribute field is required when :values are present.',
 	'required_without'     => 'The :attribute field is required when :values is not present.',
 	'required_without_all' => 'The :attribute field is required when none of :values are present.',
-	'same'                 => 'The :attribute field must match :other.',
+	'same'                 => ':attribute ველი უნდა იყოს :other შესაბამისი.',
 	'size'                 => [
 		'array'   => 'The :attribute field must contain :size items.',
 		'file'    => 'The :attribute field must be :size kilobytes.',
@@ -178,5 +178,5 @@ return [
 	|
 	*/
 
-	'attributes' => ["username" => 'მომხმარებლის', 'password' => 'პაროლის'],
+	'attributes' => ['username' => 'მომხმარებლის', 'password' => 'პაროლის', 'email' => 'ელ-ფოსტის', 'password_confirmation' => 'გაიმეორეთ პაროლის'],
 ];
