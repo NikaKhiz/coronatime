@@ -6,7 +6,8 @@
             <form action="">
                 <div class="flex gap-2 md:gap-4 py-4 px-6 max-w-[250px] rounded-md border border-gray-300">
                     <img src="{{ asset('images/search.svg') }}" alt="">
-                    <input type="text" placeholder="Search By Country" class="w-full outline-none capitalize">
+                    <input type="text" name="search" id="search" placeholder="Search By Country"
+                        class="w-full outline-none capitalize">
                 </div>
             </form>
             <div class="mt-10">
@@ -16,19 +17,31 @@
                         <tr class="flex w-full">
                             <th scope="col" class="flex items-center gap-1 md:gap-2 w-1/4">
                                 location
-                                <x-statistics.arrows />
+                                <a
+                                    href="{{ route('admin.statistics', ['column' => 'name', 'order' => $order === 'asc' ? 'desc' : 'asc']) }}">
+                                    <x-statistics.arrows :desc="request('column') === 'name' && request('order') === 'desc'" />
+                                </a>
                             </th>
                             <th scope="col" class="flex items-center md:gap-2 w-1/4">
                                 new cases
-                                <x-statistics.arrows />
-                            </th>
-                            <th scope="col" class="flex items-center gap-1 md:gap-2 w-1/4">
-                                deaths
-                                <x-statistics.arrows />
+                                <a
+                                    href="{{ route('admin.statistics', ['column' => 'confirmed', 'order' => $order === 'asc' ? 'desc' : 'asc']) }}">
+                                    <x-statistics.arrows :desc="request('column') === 'confirmed' && request('order') === 'desc'" />
+                                </a>
                             </th>
                             <th scope="col" class="flex items-center gap-1 md:gap-2 w-1/4">
                                 recovered
-                                <x-statistics.arrows />
+                                <a
+                                    href="{{ route('admin.statistics', ['column' => 'recovered', 'order' => $order === 'asc' ? 'desc' : 'asc']) }}">
+                                    <x-statistics.arrows :desc="request('column') === 'recovered' && request('order') === 'desc'" />
+                                </a>
+                            </th>
+                            <th scope="col" class="flex items-center gap-1 md:gap-2 w-1/4">
+                                deaths
+                                <a
+                                    href="{{ route('admin.statistics', ['column' => 'deaths', 'order' => $order === 'asc' ? 'desc' : 'asc']) }}">
+                                    <x-statistics.arrows :desc="request('column') === 'deaths' && request('order') === 'desc'" />
+                                </a>
                             </th>
                         </tr>
                     </thead>
@@ -36,11 +49,20 @@
                         class="flex flex-col items-center justify-between overflow-y-scroll w-full max-h-[250px] md:max-h-[450px]">
                         <tr
                             class="flex w-full  border-b-[1px] border-gray-200 text-[14px] text-black font-normal p-4 md:px-10 md:py-5 capitalize">
-                            <td class="w-1/4">worldwide</td>
-                            <td class="w-1/4">900,000</td>
-                            <td class="w-1/4">66000</td>
-                            <td class="w-1/4">9000000</td>
+                            <td class="w-1/4">{{ $worldwideStats['name'][app()->getLocale()] }}</td>
+                            <td class="w-1/4">{{ number_format($worldwideStats['confirmed']) }}</td>
+                            <td class="w-1/4">{{ number_format($worldwideStats['recovered']) }}</td>
+                            <td class="w-1/4">{{ number_format($worldwideStats['deaths']) }}</td>
                         </tr>
+                        @foreach ($statistics as $statistic)
+                            <tr
+                                class="flex w-full  border-b-[1px] border-gray-200 text-[14px] text-black font-normal p-4 md:px-10 md:py-5 capitalize">
+                                <td class="w-1/4">{{ $statistic->name }}</td>
+                                <td class="w-1/4">{{ number_format($statistic->confirmed) }}</td>
+                                <td class="w-1/4">{{ number_format($statistic->recovered) }}</td>
+                                <td class="w-1/4">{{ number_format($statistic->deaths) }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

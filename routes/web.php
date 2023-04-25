@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\StatisticController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,8 +35,8 @@ Route::middleware('guest')->group(function () {
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
 
 Route::middleware('auth')->group(function () {
-	Route::view('/admin', 'admin.dashboard')->name('admin.dashboard');
-	Route::view('/admin/statistics', 'admin.statistics')->name('admin.statistics');
+	Route::get('/admin', [StatisticController::class, 'show'])->name('admin.dashboard');
+	Route::get('/admin/statistics', [StatisticController::class, 'index'])->name('admin.statistics');
 
 	Route::get('/logout', [AuthController::class, 'logout'])->name('logout_user');
 });
