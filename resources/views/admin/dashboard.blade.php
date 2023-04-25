@@ -7,21 +7,24 @@
                 <img src="{{ asset('images/cases.svg') }}" alt="" class="w-24 h-12 md:h-16">
                 <div class="flex flex-col gap-4 text-center">
                     <p class="text-sm md:text-xl font-semibold">new cases</p>
-                    <p class="text-2xl md:text-5xl text-primary font-black">715,1515</p>
+                    <p class="text-2xl md:text-5xl text-primary font-black">
+                        {{ number_format($worldwideStats['confirmed']) }}</p>
                 </div>
             </x-statistics.stats-card>
             <x-statistics.stats-card class="bg-success bg-opacity-10 p-8 md:p-10">
                 <img src="{{ asset('images/recovery.svg') }}" alt="" class="w-24 h-12 md:h-16">
                 <div class="flex flex-col gap-4 text-center">
                     <p class="text-sm md:text-xl font-semibold">recovered</p>
-                    <p class="text-2xl md:text-5xl text-success font-black">715,1515</p>
+                    <p class="text-2xl md:text-5xl text-success font-black">
+                        {{ number_format($worldwideStats['recovered']) }}</p>
                 </div>
             </x-statistics.stats-card>
             <x-statistics.stats-card class="bg-tertiary bg-opacity-10 p-8 md:p-10">
                 <img src="{{ asset('images/death.svg') }}" alt="" class="w-24 h-12 md:h-16">
                 <div class="flex flex-col gap-4 text-center">
                     <p class="text-sm md:text-xl font-semibold">death</p>
-                    <p class="text-2xl md:text-5xl text-tertiary font-black">715,1515</p>
+                    <p class="text-2xl md:text-5xl text-tertiary font-black">
+                        {{ number_format($worldwideStats['deaths']) }}</p>
                 </div>
             </x-statistics.stats-card>
         </div>
