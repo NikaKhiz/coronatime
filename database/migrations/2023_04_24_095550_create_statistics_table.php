@@ -13,12 +13,10 @@ return new class extends Migration {
 		Schema::create('statistics', function (Blueprint $table) {
 			$table->id();
 			$table->string('country')->unique();
-			$table->string('code')->unique();
+			$table->string('name')->unique();
 			$table->integer('confirmed')->unsigned();
 			$table->integer('recovered')->unsigned();
-			$table->integer('critical')->unsigned();
 			$table->integer('deaths')->unsigned();
-			$table->foreignId('country_id')->constrained();
 			$table->timestamps();
 		});
 	}

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Worldwide;
+use App\Models\Statistic;
 
 class StatisticController extends Controller
 {
@@ -12,9 +12,9 @@ class StatisticController extends Controller
 	{
 		$this->worldwideStats = [
 			'name'      => ['en' => 'Worldwide', 'ka' => 'მსოფლიო'],
-			'confirmed' => Worldwide::all()->sum('confirmed'),
-			'recovered' => Worldwide::all()->sum('recovered'),
-			'deaths'    => Worldwide::all()->sum('deaths'),
+			'confirmed' => Statistic::all()->sum('confirmed'),
+			'recovered' => Statistic::all()->sum('recovered'),
+			'deaths'    => Statistic::all()->sum('deaths'),
 		];
 	}
 
@@ -28,7 +28,7 @@ class StatisticController extends Controller
 	public function index()
 	{
 		return view('admin.statistics', [
-			'statistics'     => Worldwide::filter(request(['search', 'column', 'order']))->get(),
+			'statistics'     => Statistic::filter(request(['search', 'column', 'order']))->get(),
 			'order'          => request('order'),
 			'worldwideStats' => $this->worldwideStats,
 		]);
