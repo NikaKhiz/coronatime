@@ -59,6 +59,19 @@ class AuthTest extends TestCase
 		$response->assertSessionHasErrors(['username'=> 'There is no user record with provided username or email.']);
 	}
 
+	public function test_auth_should_redirect_to_email_verification_if_user_with_provided_credentials_is_not_verified()
+	{
+		$username = 'testusername';
+		$password = 'password';
+		$verified = null;
+		$user = User::factory()->create(['username'=>$username, 'password' => bcrypt($password), 'email_verified_at' => $verified]);
+		$response = $this->post('/login', [
+			'username' => $username,
+			'password' => $password,
+		]);
+		$response->assertRedirect('/email/verify');
+	}
+
 	public function test_auth_should_redirect_to_dashboard_after_succesfull_login()
 	{
 		$username = 'testusername';
