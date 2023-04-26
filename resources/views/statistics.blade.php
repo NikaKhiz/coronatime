@@ -18,28 +18,28 @@
                             <th scope="col" class="break-all flex items-center gap-1 md:gap-2 w-1/4">
                                 {{ __('dashboard.location') }}
                                 <a
-                                    href="{{ route('admin.statistics', ['column' => 'name', 'order' => $order === 'asc' ? 'desc' : 'asc']) }}">
+                                    href="{{ route('statistics', ['column' => 'name', 'order' => $order === 'asc' ? 'desc' : 'asc']) }}">
                                     <x-statistics.arrows :desc="request('column') === 'name' && request('order') === 'desc'" />
                                 </a>
                             </th>
                             <th scope="col" class="flex items-center md:gap-2 w-1/4">
                                 {{ __('dashboard.cases') }}
                                 <a
-                                    href="{{ route('admin.statistics', ['column' => 'confirmed', 'order' => $order === 'asc' ? 'desc' : 'asc']) }}">
+                                    href="{{ route('statistics', ['column' => 'confirmed', 'order' => $order === 'asc' ? 'desc' : 'asc']) }}">
                                     <x-statistics.arrows :desc="request('column') === 'confirmed' && request('order') === 'desc'" />
                                 </a>
                             </th>
                             <th scope="col" class="flex items-center gap-1 md:gap-2 w-1/4">
                                 {{ __('dashboard.recovered') }}
                                 <a
-                                    href="{{ route('admin.statistics', ['column' => 'recovered', 'order' => $order === 'asc' ? 'desc' : 'asc']) }}">
+                                    href="{{ route('statistics', ['column' => 'recovered', 'order' => $order === 'asc' ? 'desc' : 'asc']) }}">
                                     <x-statistics.arrows :desc="request('column') === 'recovered' && request('order') === 'desc'" />
                                 </a>
                             </th>
                             <th scope="col" class="flex items-center gap-1 md:gap-2 w-1/4">
                                 {{ __('dashboard.deaths') }}
                                 <a
-                                    href="{{ route('admin.statistics', ['column' => 'deaths', 'order' => $order === 'asc' ? 'desc' : 'asc']) }}">
+                                    href="{{ route('statistics', ['column' => 'deaths', 'order' => $order === 'asc' ? 'desc' : 'asc']) }}">
                                     <x-statistics.arrows :desc="request('column') === 'deaths' && request('order') === 'desc'" />
                                 </a>
                             </th>

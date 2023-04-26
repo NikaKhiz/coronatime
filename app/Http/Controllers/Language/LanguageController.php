@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Language;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 
 class LanguageController extends Controller

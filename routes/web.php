@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\AuthController;
-use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Language\LanguageController;
+use App\Http\Controllers\Statistic\StatisticController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,28 +17,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::redirect('/', 'login');
-Route::middleware('guest')->group(function () {
+Route::middleware('guest')->controller(AuthController::class)->group(function () {
+	Route::post('/login', 'login')->name('login_user');
+	Route::post('/register', 'register')->name('register_user');
+	Route::post('/forgot-password', 'recoverPassword')->name('recover_password');
+	Route::get('/reset-password/{token}', 'resetPasswordForm')->name('view.reset_password');
+	Route::post('/reset-password', 'resetPassword')->name('reset_password');
+	Route::get('/email/verify/{id}/{hash}', 'verifyEmail')->middleware('signed')->name('verification.verify');
+
 	Route::view('/login', 'auth.login')->name('view.login');
-	Route::post('/login', [AuthController::class, 'login'])->name('login_user');
 	Route::view('/register', 'auth.register')->name('view.register');
-	Route::post('/register', [AuthController::class, 'register'])->name('register_user');
-
 	Route::view('/email/verify', 'auth.verify-email')->name('verification.notice');
-
-	Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
-	Route::post('/forgot-password', [AuthController::class, 'recoverPassword'])->name('password.email');
-
+	Route::view('/forgot-password', 'auth.forgot-password')->name('view.forgot_password');
 	Route::view('/reset-password', 'auth.succes-pwd')->name('view.password_reset_success');
-	Route::get('/reset-password/{token}', [AuthController::class, 'resetPasswordForm'])->name('password.reset');
-	Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
 });
 
-Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
-Route::Get('/language/{locale}', [LanguageController::class, 'changeLanguage'])->name('change_language');
-
 Route::middleware('auth')->group(function () {
-	Route::get('/admin', [StatisticController::class, 'show'])->name('admin.dashboard');
-	Route::get('/admin/statistics', [StatisticController::class, 'index'])->name('admin.statistics');
+	Route::controller(StatisticController::class)->group(function () {
+		Route::get('/dashboard', 'show')->name('dashboard');
+		Route::get('/statistics', 'index')->name('statistics');
+	});
 
 	Route::get('/logout', [AuthController::class, 'logout'])->name('logout_user');
 });
+
+Route::Get('/language/{locale}', [LanguageController::class, 'changeLanguage'])->name('change_language');

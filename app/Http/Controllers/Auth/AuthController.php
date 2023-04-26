@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
@@ -46,7 +46,7 @@ class AuthController extends Controller
 					: back()->withErrors(['email' => __($status)]);
 	}
 
-	public function resetPasswordForm($token)
+	public function resetPasswordForm($token): View
 	{
 		return view('auth.reset-password', ['token' => $token]);
 	}
@@ -82,7 +82,7 @@ class AuthController extends Controller
 		if ($authService->isUserVerified($fieldType, $request->username)) {
 			if (auth()->attempt([$fieldType => $request->username, 'password' =>$request->password], $request->has('remember'))) {
 				session()->regenerate();
-				return redirect()->route('admin.dashboard');
+				return redirect()->route('dashboard');
 			} else {
 				throw  ValidationException::withMessages([
 					'username'=> __('auth.failed'),
@@ -93,9 +93,9 @@ class AuthController extends Controller
 		}
 	}
 
-	public function logout()
+	public function logout(): RedirectResponse
 	{
 		auth()->logout();
-		return redirect('/');
+		return redirect()->route('view.login');
 	}
 }

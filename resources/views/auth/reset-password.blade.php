@@ -3,7 +3,7 @@
         <div class="md:max-w-[400px] md:gap-14 mx-auto h-full">
             <x-navigation />
             <main class="px-4 py-6 md:px-0 md:py-28 h-[80%]">
-                <form action="{{ route('password.update') }}" method="POST" class="flex flex-col gap-12 w-full h-[100%] ">
+                <form action="{{ route('reset_password') }}" method="POST" class="flex flex-col gap-12 w-full h-[100%] ">
                     @csrf
                     <input type="hidden" name="token" value="{{ $token }}">
                     <input type="email" name="email" id="email" hidden value='{{ request()->input('email') }}'>
