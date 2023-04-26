@@ -19,7 +19,7 @@
                         placeholder="{{ __('login/form.password_ph') }}" />
                     <div class="flex justify-between items-center text-[15px]">
                         <x-form.checkbox name="remember" />
-                        <a href="{{ route('password.request') }}"
+                        <a href="{{ route('view.forgot_password') }}"
                             class="capitalize font-semibold text-primary">{{ __('login/login.forgot_pwd') }}</a>
                     </div>
                     <x-form.button>{{ __('login/login.log_in') }}</x-form.button>
