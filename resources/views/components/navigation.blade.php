@@ -17,11 +17,13 @@
             <div class="items-center text-lg gap-4 hidden md:flex">
                 <p class="font-bold text-black capitalize ">{{ auth()->user()->username }}</p>
                 <div class="w-[1px] h-5 bg-gray-200"></div>
-                <a href="{{ route('logout_user') }}" class="capitalize text-black font-normal pointer">logout</a>
+                <a href="{{ route('logout_user') }}"
+                    class="capitalize text-black font-normal pointer">{{ __('dashboard.logout') }}</a>
             </div>
             <x-dropdown>
                 <a href="#" class="font-normal capitalize">{{ auth()->user()->username }}</a>
-                <a href="{{ route('logout_user') }}" class="capitalize font-normal pointer">logout</a>
+                <a href="{{ route('logout_user') }}"
+                    class="capitalize font-normal pointer">{{ __('dashboard.logout') }}</a>
             </x-dropdown>
         </div>
     @else
