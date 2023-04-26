@@ -21,14 +21,14 @@ class StatisticController extends Controller
 
 	public function show()
 	{
-		return view('admin.dashboard', [
+		return view('dashboard', [
 			'worldwideStats' => $this->worldwideStats,
 		]);
 	}
 
 	public function index()
 	{
-		return view('admin.statistics', [
+		return view('statistics', [
 			'statistics'     => Statistic::filter(request(['search', 'column', 'order']))->get(),
 			'order'          => request('order'),
 			'worldwideStats' => $this->worldwideStats,

@@ -82,7 +82,7 @@ class AuthController extends Controller
 		if ($authService->isUserVerified($fieldType, $request->username)) {
 			if (auth()->attempt([$fieldType => $request->username, 'password' =>$request->password], $request->has('remember'))) {
 				session()->regenerate();
-				return redirect()->route('admin.dashboard');
+				return redirect()->route('dashboard');
 			} else {
 				throw  ValidationException::withMessages([
 					'username'=> __('auth.failed'),

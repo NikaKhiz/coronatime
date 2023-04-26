@@ -1,6 +1,6 @@
 <nav class="flex items-center justify-between px-4 py-6 md:px-24 md:py-10 mx-auto">
     @auth
-        <a href="{{ route('admin.dashboard') }}">
+        <a href="{{ route('dashboard') }}">
             <img src="{{ asset('images/coronatime-neutral.svg') }}" alt="coronatimeImg" class="w-[140px] md:w-[170px]">
         </a>
         <div class="flex items-center gap-8 md:gap-12">

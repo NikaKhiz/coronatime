@@ -37,8 +37,8 @@ Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])-
 Route::Get('/language/{locale}', [LanguageController::class, 'changeLanguage'])->name('change_language');
 
 Route::middleware('auth')->group(function () {
-	Route::get('/admin', [StatisticController::class, 'show'])->name('admin.dashboard');
-	Route::get('/admin/statistics', [StatisticController::class, 'index'])->name('admin.statistics');
+	Route::get('/dashboard', [StatisticController::class, 'show'])->name('dashboard');
+	Route::get('/statistics', [StatisticController::class, 'index'])->name('statistics');
 
 	Route::get('/logout', [AuthController::class, 'logout'])->name('logout_user');
 });
