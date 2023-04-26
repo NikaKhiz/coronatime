@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Statistic;
 
+use App\Http\Controllers\Controller;
 use App\Models\Statistic;
 
 class StatisticController extends Controller
