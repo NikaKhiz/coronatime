@@ -1,10 +1,10 @@
-@props(['name'])
+@props(['name','label'])
 @php
     $error = $errors->has("$name");
     $success = !$error && !empty(old("$name"));
 @endphp
 <x-form.field>
-    <x-form.label name="{{ $name }}" />
+    <x-form.label name="{{ $label }}" />
     <div class="flex flex-col gap-3 relative">
         <input id="{{ $name }}" name="{{ $name }}"
             class="px-6 py-4 border {{ $error ? 'border-red-500' : ($success ? 'border-success' : 'border-gray-500') }} focus:border-primary transition-all duration-300 rounded-md outline-none text-gray-700 w-full"

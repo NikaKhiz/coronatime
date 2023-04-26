@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\StatisticController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
+Route::Get('/language/{locale}', [LanguageController::class, 'changeLanguage'])->name('change_language');
 
 Route::middleware('auth')->group(function () {
 	Route::get('/admin', [StatisticController::class, 'show'])->name('admin.dashboard');

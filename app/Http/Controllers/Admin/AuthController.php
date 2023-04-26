@@ -75,7 +75,7 @@ class AuthController extends Controller
 		$fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 		if (!User::firstWhere($fieldType, $request->username)) {
 			throw  ValidationException::withMessages([
-				'username'=> 'There is no user record with provided username or email.',
+				'username'=> __('login/login.username'),
 			]);
 		}
 
@@ -85,7 +85,7 @@ class AuthController extends Controller
 				return redirect()->route('admin.dashboard');
 			} else {
 				throw  ValidationException::withMessages([
-					'username'=> 'Provided credentials are incorrect.',
+					'username'=> __('auth.failed'),
 				]);
 			}
 		} else {

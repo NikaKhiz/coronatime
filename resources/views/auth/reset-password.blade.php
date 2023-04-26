@@ -8,16 +8,16 @@
                     <input type="hidden" name="token" value="{{ $token }}">
                     <input type="email" name="email" id="email" hidden value='{{ request()->input('email') }}'>
 
-                    <h1 class="text-black font-bold text-2xl md:text-3xl text-center">Reset Password
+                    <h1 class="text-black font-black text-2xl md:text-3xl text-center">{{ __('email/reset.recover') }}
                     </h1>
                     <div class="w-full h-full flex flex-col md:gap-12  justify-between">
                         <div class="flex flex-col gap-4">
                             <x-form.field>
-                                <label for="password" class="capitalize text-black font-bold text-[15px]">New
-                                    password</label>
+                                <label for="password"
+                                    class="capitalize text-black font-bold text-[15px]">{{ __('email/reset.new_pwd') }}</label>
                                 <div class="flex flex-col gap-3 relative">
                                     <input type="password" id="password" name="password"
-                                        placeholder="Enter new password"
+                                        placeholder="{{ __('email/reset.new_pwd_ph') }}"
                                         class="px-6 py-4 border {{ $errors->has('password') ? 'border-red-500' : 'border-gray-500' }} focus:border-primary transition-all duration-300 rounded-md outline-none text-gray-700 w-full">
                                     @if ($errors->has('password'))
                                         <div class="flex items-center gap-2">
@@ -29,11 +29,10 @@
                             </x-form.field>
                             <x-form.field>
                                 <label for="password_confirmation"
-                                    class="capitalize text-black font-bold text-[15px]">New
-                                    Repeat Password</label>
+                                    class="capitalize text-black font-bold text-[15px]">{{ __('email/reset.new_pwd_confirmation') }}</label>
                                 <div class="flex flex-col gap-3 relative">
                                     <input type="password" id="password_confirmation" name="password_confirmation"
-                                        placeholder="Enter new password"
+                                        placeholder="{{ __('email/reset.new_pwd_confirmation') }}"
                                         class="px-6 py-4 border {{ $errors->has('password_confirmation') ? 'border-red-500' : 'border-gray-500' }} focus:border-primary transition-all duration-300 rounded-md outline-none text-gray-700 w-full">
                                     @if ($errors->has('password_confirmation'))
                                         <div class="flex items-center gap-2">
@@ -44,7 +43,7 @@
                                 </div>
                             </x-form.field>
                         </div>
-                        <x-form.button>Reset Password</x-form.button>
+                        <x-form.button>{{ __('email/reset.recover') }}</x-form.button>
                     </div>
                 </form>
             </main>

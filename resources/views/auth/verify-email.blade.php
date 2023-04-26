@@ -5,7 +5,7 @@
             <div
                 class="flex flex-col items-center gap-4 fixed top-[250px] md:top-[300px] left-[50%] transform -translate-x-[50%] -translate-y-[50%] w-full p-4 text-center md:text-left ">
                 <img src="{{ asset('images/checkmark.gif') }}" alt="confirmationCheckmark">
-                <p class="text-xl text-black font-normal">We have sent you a confirmation email</p>
+                <p class="text-xl text-black font-normal">{{ __('email/verify.email') }}</p>
             </div>
         </div>
 </x-layout>
