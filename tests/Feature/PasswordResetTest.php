@@ -17,14 +17,14 @@ class PasswordResetTest extends TestCase
 
 	public function test_password_submit_page_is_accessible()
 	{
-		$response = $this->get('/forgot-password');
+		$response = $this->get(route('view.forgot_password'));
 		$response->assertSuccessful();
 		$response->assertViewIs('auth.forgot-password');
 	}
 
 	public function test_password_submit_should_return_an_error_if_inputs_is_are_provided()
 	{
-		$response = $this->post('/forgot-password');
+		$response = $this->post(route('recover_password'));
 		$response->assertSessionHasErrors('email');
 	}
 
@@ -32,7 +32,7 @@ class PasswordResetTest extends TestCase
 	{
 		$email = 'johndoeexample.com';
 
-		$response = $this->post('/forgot-password', [
+		$response = $this->post(route('recover_password'), [
 			'email' => $email,
 		]);
 		$response->assertSessionHasErrors('email');
@@ -42,7 +42,7 @@ class PasswordResetTest extends TestCase
 	{
 		$email = 'johndoe@example.com';
 
-		$response = $this->post('/forgot-password', [
+		$response = $this->post(route('recover_password'), [
 			'email' => $email,
 		]);
 		$response->assertSessionHasErrors('email');
@@ -51,10 +51,10 @@ class PasswordResetTest extends TestCase
 	public function test_password_submit_should_send_reset_link_to_user_registered_with_provided_email()
 	{
 		Notification::fake(ResetPassword::class);
-		
+
 		$user = User::factory()->create();
-		$response = $this->post('/forgot-password', ['email' => $user->email]);
-		$response->assertRedirect('/email/verify');
+		$response = $this->post(route('recover_password'), ['email' => $user->email]);
+		$response->assertRedirect(route('verification.notice'));
 
 		Notification::assertSentTo(
 			$user,
@@ -75,9 +75,7 @@ class PasswordResetTest extends TestCase
 		$token = Password::createToken($user);
 
 		$this
-		->get('/reset-password/{token}', [
-			'token' => $token,
-		])
+		->get(route('view.reset_password', ['token' => $token]))
 		->assertViewIs('auth.reset-password')
 		->assertSuccessful();
 	}
@@ -89,9 +87,8 @@ class PasswordResetTest extends TestCase
 		]);
 		$token = Password::createToken($user);
 
-		$response = $this->post('/reset-password', [
+		$response = $this->post(route('reset_password', ['token' => $token]), [
 			'email' => $user->email,
-			'token' => $token,
 		]);
 		$response->assertSessionHasErrors([
 			'password', 'password_confirmation',
@@ -105,9 +102,8 @@ class PasswordResetTest extends TestCase
 		]);
 		$token = Password::createToken($user);
 
-		$response = $this->post('/reset-password', [
+		$response = $this->post(route('reset_password', ['token' => $token]), [
 			'email'   => $user->email,
-			'token'   => $token,
 			'password'=> 'ps',
 		]);
 		$response->assertSessionHasErrors([
@@ -122,9 +118,8 @@ class PasswordResetTest extends TestCase
 		]);
 		$token = Password::createToken($user);
 
-		$response = $this->post('/reset-password', [
+		$response = $this->post(route('reset_password', ['token' => $token]), [
 			'email'                 => $user->email,
-			'token'                 => $token,
 			'password'              => 'password',
 			'password_confirmation' => 'pasword',
 		]);
@@ -142,13 +137,12 @@ public function test_password_reset_page_should_update_password_for_current_user
 	]);
 	$token = Password::createToken($user);
 
-	$response = $this->post('/reset-password', [
+	$response = $this->post(route('reset_password', ['token' => $token]), [
 		'email'                 => $user->email,
-		'token'                 => $token,
 		'password'              => 'password',
 		'password_confirmation' => 'password',
 	]);
-	$response->assertRedirect('/reset-password');
+	$response->assertRedirect(route('reset_password'));
 
 	Event::assertDispatched(PasswordReset::class);
 }
