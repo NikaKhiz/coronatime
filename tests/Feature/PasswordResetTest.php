@@ -51,23 +51,21 @@ class PasswordResetTest extends TestCase
 	public function test_password_submit_should_send_reset_link_to_user_registered_with_provided_email()
 	{
 		Notification::fake(ResetPassword::class);
+		
+		$user = User::factory()->create();
+		$response = $this->post('/forgot-password', ['email' => $user->email]);
+		$response->assertRedirect('/email/verify');
 
-		$data = [
-			'email'    => 'johndoe@example.com',
-			'password' => bcrypt('password'),
-		];
-
-		$user = User::factory()->create($data);
-
-		$this
-		->followingRedirects()
-		->from('/fortot-password')
-		->post('/forgot-password', [
-			'email' => $user->email,
-		])
-		->assertSuccessful();
-
-		Notification::assertSentTo($user, ResetPassword::class);
+		Notification::assertSentTo(
+			$user,
+			ResetPassword::class,
+			function ($notification, $channels) use ($user) {
+				$mailMessage = $notification->toMail($user);
+				$view = $mailMessage->viewData;
+				$url = $view['url'];
+				return $url === route('view.reset_password', $notification->token) . '?email=' . $user->getEmailForPasswordReset();
+			}
+		);
 	}
 
 	public function test_password_reset_page_is_accessible()
