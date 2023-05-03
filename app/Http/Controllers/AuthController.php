@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RecoverPasswordRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Http\Requests\EmailVerifyRequest;
 use App\Models\User;
 use App\Services\AuthService;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
@@ -29,9 +28,9 @@ class AuthController extends Controller
 		return redirect()->route('verification.notice');
 	}
 
-	public function verifyEmail(Request $request, AuthService $authservice): View
+	public function verifyEmail(EmailVerifyRequest $request): View
 	{
-		$authservice->verify($request);
+		$request->fulfill();
 		return view('auth.success-email');
 	}
 
@@ -70,9 +69,11 @@ class AuthController extends Controller
 		: back()->withErrors(['email' => [__($status)]]);
 	}
 
-	public function login(LoginRequest $request, AuthService $authService): RedirectResponse
+	public function login(LoginRequest $request): RedirectResponse
 	{
+		$authService = new AuthService;
 		$fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
 		if (!User::firstWhere($fieldType, $request->username)) {
 			throw  ValidationException::withMessages([
 				'username'=> __('login/login.username'),
