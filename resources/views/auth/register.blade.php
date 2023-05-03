@@ -17,21 +17,21 @@
                         <x-form.input name="username" label="{{ __('register/form.username') }}"
                             placeholder="{{ __('register/form.username_placeholder') }}" :value="old('username')" />
                         @if (!$errors->has('username'))
-                            <p class="text-xs text-gray-600 font-normal">{{ __('register/form.username_ref') }}</p>
+                            <p class="text-xs text-gray-600 font-normal">{{ __('register/form.username_reference') }}</p>
                         @endif
                     </div>
                     <div class="flex flex-col gap-2">
                         <x-form.input name="email" label="{{ __('register/form.email') }}"
                             placeholder="{{ __('register/form.email_placeholder') }}" :value="old('email')" />
                         @if (!$errors->has('email'))
-                            <p class="text-xs text-gray-600 font-normal">{{ __('register/form.email_ref') }}</p>
+                            <p class="text-xs text-gray-600 font-normal">{{ __('register/form.email_reference') }}</p>
                         @endif
                     </div>
                     <div class="flex flex-col gap-2">
                         <x-form.input name="password" label="{{ __('register/form.password') }}" type="password"
                             placeholder="{{ __('register/form.password_placeholder') }}" />
                         @if (!$errors->has('password'))
-                            <p class="text-xs text-gray-600 font-normal">{{ __('register/form.password_ref') }}</p>
+                            <p class="text-xs text-gray-600 font-normal">{{ __('register/form.password_reference') }}</p>
                         @endif
                     </div>
                     <div class="flex flex-col gap-2">
@@ -43,7 +43,7 @@
                                 class="px-6 py-4 border {{ $errors->has('password_confirmation') ? 'border-red-500' : 'border-gray-500' }}  focus:border-primary transition-all duration-300 rounded-md outline-none capitalize text-gray-700">
                         </x-form.field>
                         @if (!$errors->has('password_confirmation'))
-                            <p class="text-xs text-gray-600 font-normal">{{ __('register/form.password_repeat_ref') }}
+                            <p class="text-xs text-gray-600 font-normal">{{ __('register/form.password_repeat_reference') }}
                             </p>
                         @else
                             <div class="flex items-center gap-2">

@@ -14,10 +14,10 @@
                         <div class="flex flex-col gap-4">
                             <x-form.field>
                                 <label for="password"
-                                    class="capitalize text-black font-bold text-[15px]">{{ __('email/reset.new_pwd') }}</label>
+                                    class="capitalize text-black font-bold text-[15px]">{{ __('email/reset.new_password') }}</label>
                                 <div class="flex flex-col gap-3 relative">
                                     <input type="password" id="password" name="password"
-                                        placeholder="{{ __('email/reset.new_pwd_placeholder') }}"
+                                        placeholder="{{ __('email/reset.new_password_placeholder') }}"
                                         class="px-6 py-4 border {{ $errors->has('password') ? 'border-red-500' : 'border-gray-500' }} focus:border-primary transition-all duration-300 rounded-md outline-none text-gray-700 w-full">
                                     @if ($errors->has('password'))
                                         <div class="flex items-center gap-2">
@@ -29,10 +29,10 @@
                             </x-form.field>
                             <x-form.field>
                                 <label for="password_confirmation"
-                                    class="capitalize text-black font-bold text-[15px]">{{ __('email/reset.new_pwd_confirmation') }}</label>
+                                    class="capitalize text-black font-bold text-[15px]">{{ __('email/reset.new_password_confirmation') }}</label>
                                 <div class="flex flex-col gap-3 relative">
                                     <input type="password" id="password_confirmation" name="password_confirmation"
-                                        placeholder="{{ __('email/reset.new_pwd_confirmation') }}"
+                                        placeholder="{{ __('email/reset.new_password_confirmation') }}"
                                         class="px-6 py-4 border {{ $errors->has('password_confirmation') ? 'border-red-500' : 'border-gray-500' }} focus:border-primary transition-all duration-300 rounded-md outline-none text-gray-700 w-full">
                                     @if ($errors->has('password_confirmation'))
                                         <div class="flex items-center gap-2">
