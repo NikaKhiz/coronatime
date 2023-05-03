@@ -71,14 +71,13 @@ class AuthController extends Controller
 	public function login(LoginRequest $request): RedirectResponse
 	{
 		$fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-		$isUserVerified = User::firstWhere($fieldType, $request->username)['email_verified_at'] !== null;
-
 		if (!User::firstWhere($fieldType, $request->username)) {
 			throw  ValidationException::withMessages([
 				'username'=> __('login/login.username'),
 			]);
 		}
 
+		$isUserVerified = User::firstWhere($fieldType, $request->username)['email_verified_at'] !== null;
 		if ($isUserVerified) {
 			if (auth()->attempt([$fieldType => $request->username, 'password' =>$request->password], $request->has('remember'))) {
 				session()->regenerate();
