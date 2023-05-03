@@ -13,8 +13,8 @@
             <div class="mt-10">
                 <table class="w-full text-left">
                     <thead
-                        class="text-xs text-black font-semibold capitalize bg-gray-100  p-4 md:px-10 md:py-5 flex w-full">
-                        <tr class="flex w-full">
+                        class="text-[10px] md:text-[16px] text-black font-semibold capitalize bg-gray-100  p-4 md:px-10 md:py-5 flex w-full">
+                        <tr class="flex w-full gap-2">
                             <th scope="col" class="break-all flex items-center gap-1 md:gap-2 w-1/4">
                                 {{ __('dashboard.location') }}
                                 <a
@@ -22,7 +22,7 @@
                                     <x-statistics.arrows :desc="request('column') === 'name' && request('order') === 'desc'" />
                                 </a>
                             </th>
-                            <th scope="col" class="break-all flex items-center md:gap-2 w-1/4">
+                            <th scope="col" class="break-all flex items-center gap-1 md:gap-2 w-1/4">
                                 {{ __('dashboard.cases') }}
                                 <a
                                     href="{{ route('statistics', ['column' => 'confirmed', 'order' => $order === 'asc' ? 'desc' : 'asc']) }}">
@@ -48,19 +48,19 @@
                     <tbody
                         class="flex flex-col items-center justify-between overflow-y-scroll w-full max-h-[250px] md:max-h-[450px]">
                         <tr
-                            class="flex w-full  border-b-[1px] border-gray-200 text-[14px] text-black font-normal p-4 md:px-10 md:py-5 capitalize">
-                            <td class="w-1/4">{{ $worldwideStats['name'][app()->getLocale()] }}</td>
-                            <td class="w-1/4">{{ number_format($worldwideStats['confirmed']) }}</td>
-                            <td class="w-1/4">{{ number_format($worldwideStats['recovered']) }}</td>
-                            <td class="w-1/4">{{ number_format($worldwideStats['deaths']) }}</td>
+                            class="flex w-full  border-b-[1px] border-gray-200 text-[11px] md:text-[15px] text-black font-normal p-4 md:px-10 md:py-5 capitalize">
+                            <td class="break-all w-1/4">{{ $worldwideStats['name'][app()->getLocale()] }}</td>
+                            <td class="break-all w-1/4">{{ number_format($worldwideStats['confirmed']) }}</td>
+                            <td class="break-all w-1/4">{{ number_format($worldwideStats['recovered']) }}</td>
+                            <td class="break-all w-1/4">{{ number_format($worldwideStats['deaths']) }}</td>
                         </tr>
                         @foreach ($statistics as $statistic)
                             <tr
-                                class="flex w-full  border-b-[1px] border-gray-200 text-[14px] text-black font-normal p-4 md:px-10 md:py-5 capitalize">
-                                <td class="w-1/4">{{ $statistic->name }}</td>
-                                <td class="w-1/4">{{ number_format($statistic->confirmed) }}</td>
-                                <td class="w-1/4">{{ number_format($statistic->recovered) }}</td>
-                                <td class="w-1/4">{{ number_format($statistic->deaths) }}</td>
+                                class="flex w-full  border-b-[1px] border-gray-200 text-[11px] md:text-[15px] text-black font-normal p-4 md:px-10 md:py-5 capitalize">
+                                <td class="break-all w-1/4">{{ $statistic->name }}</td>
+                                <td class="break-all w-1/4">{{ number_format($statistic->confirmed) }}</td>
+                                <td class="break-all w-1/4">{{ number_format($statistic->recovered) }}</td>
+                                <td class="break-all w-1/4">{{ number_format($statistic->deaths) }}</td>
                             </tr>
                         @endforeach
                     </tbody>
