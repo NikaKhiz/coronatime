@@ -8,7 +8,6 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Http\Requests\EmailVerifyRequest;
 use App\Models\User;
-use App\Services\AuthService;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -71,8 +70,8 @@ class AuthController extends Controller
 
 	public function login(LoginRequest $request): RedirectResponse
 	{
-		$authService = new AuthService;
 		$fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+		$isUserVerified = User::firstWhere($fieldType, $request->username)['email_verified_at'] !== null;
 
 		if (!User::firstWhere($fieldType, $request->username)) {
 			throw  ValidationException::withMessages([
@@ -80,7 +79,7 @@ class AuthController extends Controller
 			]);
 		}
 
-		if ($authService->isUserVerified($fieldType, $request->username)) {
+		if ($isUserVerified) {
 			if (auth()->attempt([$fieldType => $request->username, 'password' =>$request->password], $request->has('remember'))) {
 				session()->regenerate();
 				return redirect()->route('dashboard');

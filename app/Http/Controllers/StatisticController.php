@@ -2,37 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Statistic;
+use App\Services\StatisticService;
 use Illuminate\View\View;
 
 class StatisticController extends Controller
 {
-	protected $worldwideStats;
-
-	public function __construct()
-	{
-		$this->worldwideStats = [
-			'name'      => ['en' => 'Worldwide', 'ka' => 'მსოფლიო'],
-			'confirmed' => Statistic::all()->sum('confirmed'),
-			'recovered' => Statistic::all()->sum('recovered'),
-			'deaths'    => Statistic::all()->sum('deaths'),
-		];
-	}
-
 	public function show(): View
 	{
+		$worldwideStats = new StatisticService;
 		return view('dashboard', [
-			'worldwideStats' => $this->worldwideStats,
+			'worldwideStats' => $worldwideStats->getWorldwideStatistics(),
 		]);
 	}
 
 	public function index(): View
 	{
+		$worldwideStats = new StatisticService;
+
 		return view('statistics', [
 			'statistics'     => Statistic::filter(request(['search', 'column', 'order']))->get(),
 			'order'          => request('order'),
-			'worldwideStats' => $this->worldwideStats,
+			'worldwideStats' => $worldwideStats->getWorldwideStatistics(),
 		]);
 	}
 }
