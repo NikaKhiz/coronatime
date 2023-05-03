@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RecoverPasswordRequest;
-use App\Http\Requests\Auth\RegisterUserRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Models\User;
 use App\Services\AuthService;
@@ -21,7 +21,7 @@ use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-	public function register(RegisterUserRequest $request): RedirectResponse
+	public function register(RegisterRequest $request): RedirectResponse
 	{
 		$user = User::create([...$request->validated(), 'password' => bcrypt($request->password)]);
 

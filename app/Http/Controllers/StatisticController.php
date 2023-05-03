@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Statistic;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Statistic;
