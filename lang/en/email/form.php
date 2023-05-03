@@ -2,6 +2,6 @@
 
 return [
 	'email'   => 'Email',
-	'email_ph'=> 'Enter your email',
+	'email_placeholder'=> 'Enter your email',
 	'reset'   => 'reset password',
 ];

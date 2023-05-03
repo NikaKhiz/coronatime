@@ -15,21 +15,21 @@
 
                     <div class="flex flex-col gap-2">
                         <x-form.input name="username" label="{{ __('register/form.username') }}"
-                            placeholder="{{ __('register/form.username_ph') }}" :value="old('username')" />
+                            placeholder="{{ __('register/form.username_placeholder') }}" :value="old('username')" />
                         @if (!$errors->has('username'))
                             <p class="text-xs text-gray-600 font-normal">{{ __('register/form.username_ref') }}</p>
                         @endif
                     </div>
                     <div class="flex flex-col gap-2">
                         <x-form.input name="email" label="{{ __('register/form.email') }}"
-                            placeholder="{{ __('register/form.email_ph') }}" :value="old('email')" />
+                            placeholder="{{ __('register/form.email_placeholder') }}" :value="old('email')" />
                         @if (!$errors->has('email'))
                             <p class="text-xs text-gray-600 font-normal">{{ __('register/form.email_ref') }}</p>
                         @endif
                     </div>
                     <div class="flex flex-col gap-2">
                         <x-form.input name="password" label="{{ __('register/form.password') }}" type="password"
-                            placeholder="{{ __('register/form.password_ph') }}" />
+                            placeholder="{{ __('register/form.password_placeholder') }}" />
                         @if (!$errors->has('password'))
                             <p class="text-xs text-gray-600 font-normal">{{ __('register/form.password_ref') }}</p>
                         @endif

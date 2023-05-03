@@ -14,9 +14,9 @@
                     @csrf
 
                     <x-form.input name="username" label="{{ __('login/form.username') }}"
-                        placeholder="{{ __('login/form.username_ph') }}" :value="old('username')" />
+                        placeholder="{{ __('login/form.username_placeholder') }}" :value="old('username')" />
                     <x-form.input name="password" label="{{ __('login/form.password') }}" type="password"
-                        placeholder="{{ __('login/form.password_ph') }}" />
+                        placeholder="{{ __('login/form.password_placeholder') }}" />
                     <div class="flex justify-between items-center text-[15px]">
                         <x-form.checkbox name="remember" />
                         <a href="{{ route('view.forgot_password') }}"

@@ -17,7 +17,7 @@
                                     class="capitalize text-black font-bold text-[15px]">{{ __('email/reset.new_pwd') }}</label>
                                 <div class="flex flex-col gap-3 relative">
                                     <input type="password" id="password" name="password"
-                                        placeholder="{{ __('email/reset.new_pwd_ph') }}"
+                                        placeholder="{{ __('email/reset.new_pwd_placeholder') }}"
                                         class="px-6 py-4 border {{ $errors->has('password') ? 'border-red-500' : 'border-gray-500' }} focus:border-primary transition-all duration-300 rounded-md outline-none text-gray-700 w-full">
                                     @if ($errors->has('password'))
                                         <div class="flex items-center gap-2">
