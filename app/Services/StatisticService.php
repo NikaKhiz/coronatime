@@ -6,10 +6,9 @@ use App\Models\Statistic;
 
 class StatisticService
 {
-	public static function getWorldwideStatistics()
+	public static function getWorldwideStatistics(): array
 	{
 		return [
-			'name'      => ['en' => 'Worldwide', 'ka' => 'მსოფლიო'],
 			'confirmed' => Statistic::all()->sum('confirmed'),
 			'recovered' => Statistic::all()->sum('recovered'),
 			'deaths'    => Statistic::all()->sum('deaths'),

@@ -14,7 +14,7 @@ class Statistic extends Model
 
 	protected $translatable = ['name'];
 
-	public function scopeFilter(object $query, array $filters)
+	public function scopeFilter(object $query, array $filters): void
 	{
 		$locale = app()->getLocale();
 

@@ -50,7 +50,7 @@
                         class="flex flex-col items-center justify-between overflow-y-scroll w-full max-h-[250px] md:max-h-[450px]">
                         <tr
                             class="flex w-full  border-b-[1px] border-gray-200 text-[11px] md:text-[15px] text-black font-normal p-4 md:px-10 md:py-5 capitalize">
-                            <td class="break-all w-1/4">{{ $worldwideStats['name'][app()->getLocale()] }}</td>
+                            <td class="break-all w-1/4">{{ __('statistic/staticTexts.worldwide') }}</td>
                             <td class="break-all w-1/4">{{ number_format($worldwideStats['confirmed']) }}</td>
                             <td class="break-all w-1/4">{{ number_format($worldwideStats['recovered']) }}</td>
                             <td class="break-all w-1/4">{{ number_format($worldwideStats['deaths']) }}</td>
