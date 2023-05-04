@@ -10,20 +10,17 @@ class StatisticController extends Controller
 {
 	public function show(): View
 	{
-		$worldwideStats = new StatisticService;
 		return view('dashboard', [
-			'worldwideStats' => $worldwideStats->getWorldwideStatistics(),
+			'worldwideStats' => StatisticService::getWorldwideStatistics(),
 		]);
 	}
 
 	public function index(): View
 	{
-		$worldwideStats = new StatisticService;
-
 		return view('statistics', [
 			'statistics'     => Statistic::filter(request(['search', 'column', 'order']))->get(),
 			'order'          => request('order'),
-			'worldwideStats' => $worldwideStats->getWorldwideStatistics(),
+			'worldwideStats' => StatisticService::getWorldwideStatistics(),
 		]);
 	}
 }

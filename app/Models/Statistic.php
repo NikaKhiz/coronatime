@@ -14,18 +14,18 @@ class Statistic extends Model
 
 	protected $translatable = ['name'];
 
-	public function scopeFilter($query, array $filters)
+	public function scopeFilter(object $query, array $filters)
 	{
 		$locale = app()->getLocale();
 
-		$query->when($filters['search'] ?? false, function ($query, $search) use ($locale) {
+		$query->when($filters['search'] ?? false, function (object $query, string $search) use ($locale) {
 			$search = ucfirst(strtolower($search));
-			$query->where(function ($query) use ($search, $locale) {
+			$query->where(function (object $query) use ($search, $locale) {
 				$query->where("name->$locale", 'LIKE', "%$search%");
 			});
 		});
 
-		$query->when($filters['column'] ?? false, function ($query, $column) use ($filters) {
+		$query->when($filters['column'] ?? false, function (object $query, string $column) use ($filters) {
 			$order = $filters['order'] ?? 'asc';
 			$query->orderBy($column, $order);
 		});
