@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Language\LanguageController;
-use App\Http\Controllers\Statistic\StatisticController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\StatisticController;
 use Illuminate\Support\Facades\Route;
 
 /*

@@ -1,8 +1,8 @@
 <?php
 
 return [
-	'username'    => 'მომხმარებელი',
-	'password'    => 'პაროლი',
-	'username_ph' => 'შეიყვანეთ იუზერი ან მეილი',
-	'password_ph' => 'შეიყვანეთ პაროლი',
+	'username'             => 'მომხმარებელი',
+	'password'             => 'პაროლი',
+	'username_placeholder' => 'შეიყვანეთ იუზერი ან მეილი',
+	'password_placeholder' => 'შეიყვანეთ პაროლი',
 ];

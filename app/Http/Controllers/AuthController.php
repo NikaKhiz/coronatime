@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RecoverPasswordRequest;
-use App\Http\Requests\Auth\RegisterUserRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Http\Requests\EmailVerifyRequest;
 use App\Models\User;
-use App\Services\AuthService;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
@@ -21,7 +19,7 @@ use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-	public function register(RegisterUserRequest $request): RedirectResponse
+	public function register(RegisterRequest $request): RedirectResponse
 	{
 		$user = User::create([...$request->validated(), 'password' => bcrypt($request->password)]);
 
@@ -29,9 +27,9 @@ class AuthController extends Controller
 		return redirect()->route('verification.notice');
 	}
 
-	public function verifyEmail(Request $request, AuthService $authservice): View
+	public function verifyEmail(EmailVerifyRequest $request): View
 	{
-		$authservice->verify($request);
+		$request->fulfill();
 		return view('auth.success-email');
 	}
 
@@ -70,7 +68,7 @@ class AuthController extends Controller
 		: back()->withErrors(['email' => [__($status)]]);
 	}
 
-	public function login(LoginRequest $request, AuthService $authService): RedirectResponse
+	public function login(LoginRequest $request): RedirectResponse
 	{
 		$fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 		if (!User::firstWhere($fieldType, $request->username)) {
@@ -79,7 +77,8 @@ class AuthController extends Controller
 			]);
 		}
 
-		if ($authService->isUserVerified($fieldType, $request->username)) {
+		$isUserVerified = User::firstWhere($fieldType, $request->username)['email_verified_at'] !== null;
+		if ($isUserVerified) {
 			if (auth()->attempt([$fieldType => $request->username, 'password' =>$request->password], $request->has('remember'))) {
 				session()->regenerate();
 				return redirect()->route('dashboard');

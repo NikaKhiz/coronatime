@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'email'   => 'Email',
-	'email_ph'=> 'Enter your email',
-	'reset'   => 'reset password',
+	'email'            => 'Email',
+	'email_placeholder'=> 'Enter your email',
+	'reset'            => 'reset password',
 ];
