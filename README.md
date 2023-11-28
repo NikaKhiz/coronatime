@@ -37,7 +37,7 @@ The application has login,register,verify email and reset passwords functionalit
 -   <img src="readme/assets/laravel.png" height="18" style="position: relative; top: 4px" /> [Laravel@10.x](https://laravel.com/docs/10.x) - back-end framework
 -   <img src="readme/assets/spatie.png" height="19" style="position: relative; top: 4px" /> [Spatie Translatable](https://github.com/spatie/laravel-translatable) - package for translation
 -   <img src="readme/assets/alpine.png" height="19" style="position: relative; top: 4px" /> [Alpine Js](https://https://github.com/alpinejs/alpine) - package for javascript features
--   <img src="readme/assets/tailwind.png" height="18" style="position: relative; top: 4px" /> [TailwindCSS](https://tailwindcss.com/)
+-   <img src="readme/assets/tailwind.png" height="18" style="position: relative; top: 4px" /> [TailwindCSS](https://tailwindcss.com/) - css framework
 
 #
 
@@ -46,7 +46,7 @@ The application has login,register,verify email and reset passwords functionalit
 1\. First of all you need to clone Coronatime repository from github:
 
 ```sh
-git clone https://github.com/RedberryInternship/nika-khizambareli-movie-quotes
+git clone https://github.com/NikaKhiz/coronatime.git
 ```
 
 2\. Next step requires you to run _composer install_ in order to install all the dependencies.
@@ -60,14 +60,6 @@ composer install
 ```sh
 npm install
 ```
-
-and also:
-
-```sh
-npm run dev
-```
-
-in order to build your JS/SaaS resources.
 
 4\. Now we need to set our env file. Go to the root of your project and execute this command.
 
